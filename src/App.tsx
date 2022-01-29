@@ -1,14 +1,17 @@
 import { BrowserRouter as Router } from 'react-router-dom'
 
+import { Contexts } from './contexts'
 import Routes from './routes'
 import GlobalStyle from './styles/global'
 
 const App = () => {
   return (
-    <Router>
-      <Routes />
+    <Contexts>
+      <Router>
+        <Routes />
+      </Router>
       <GlobalStyle />
-    </Router>
+    </Contexts>
   )
 }
 

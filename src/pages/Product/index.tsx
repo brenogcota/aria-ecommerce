@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap'
 import { FaShoppingCart } from 'react-icons/fa'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useSpeechSynthesis } from 'react-speech-kit'
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition'
 
+import { useCart } from '@/contexts/useCart'
 import api from '@/services/api'
 import { Button } from 'antd'
 
@@ -23,6 +24,8 @@ const Product: React.FC = () => {
 
   const param: Param = useParams()
   const { speak } = useSpeechSynthesis()
+  const { addToCart } = useCart()
+  const history = useHistory()
 
   const commands = [
     {
@@ -49,20 +52,13 @@ const Product: React.FC = () => {
   })
 
   const handleProduct = (size: string, color: string) => {
-    addToCart()
     setProduct({
       size,
       color,
       ...product,
     })
-  }
-
-  const addToCart = () => {
-    api.post('/carts', {
-      userId: 0,
-      date: new Date(),
-      products: [product],
-    })
+    addToCart(product)
+    history.push('/cart')
   }
 
   useEffect(() => {
