@@ -22,6 +22,8 @@ const Checkout = () => {
     setSelectedPaymentMethod,
   ] = useState<PaymentSelectionProps>('boleto')
 
+  document.title = 'Osirianos | Checkout'
+
   const handleWithSelectedPaymenthMethod = (type: PaymentSelectionProps) => {
     setSelectedPaymentMethod(type)
   }
