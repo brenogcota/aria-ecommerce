@@ -52,6 +52,7 @@ const Product: React.FC = () => {
   })
 
   const handleProduct = (size: string, color: string) => {
+    console.log('ENTROU NESSE COCO')
     setProduct({
       size,
       color,
@@ -73,7 +74,7 @@ const Product: React.FC = () => {
   }
 
   const readDescription = async () => {
-    await SpeechRecognition.stopListening()
+    SpeechRecognition.stopListening()
     await speak({ text: message })
   }
 
@@ -135,6 +136,8 @@ const Product: React.FC = () => {
       >
         {listening ? 'Stop' : 'Buy with Voice'}
       </Button>
+
+      <Button onClick={() => history.push('/cart')}>Ir para carrinho</Button>
 
       <br />
       <br />

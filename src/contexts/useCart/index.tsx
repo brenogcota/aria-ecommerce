@@ -32,32 +32,36 @@ export const CartProvider: React.FC = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (allProducts.length > 0) {
-      setLoadingCart(true)
-      api
-        .get('carts')
-        .then((res) => {
-          const itemsInCart = res?.data[0]?.products
+    setLoadingCart(false)
+  }, [cartItems])
 
-          if (itemsInCart?.length > 0) {
-            itemsInCart.forEach((item: any) => {
-              const findedProduct = allProducts.find(
-                (prod) => prod.id === item.productId
-              )
-              if (
-                findedProduct &&
-                !cartItems.find((prod) => prod.id === item.productId)
-              )
-                setCartItems((prev) => [
-                  ...prev,
-                  { ...findedProduct, quantity: item.quantity },
-                ])
-            })
-          }
-        })
-        .finally(() => setLoadingCart(false))
-    }
-  }, [allProducts])
+  // useEffect(() => {
+  //   if (allProducts.length > 0) {
+  //     setLoadingCart(true)
+  //     api
+  //       .get('carts')
+  //       .then((res) => {
+  //         const itemsInCart = res?.data[0]?.products
+
+  //         if (itemsInCart?.length > 0) {
+  //           itemsInCart.forEach((item: any) => {
+  //             const findedProduct = allProducts.find(
+  //               (prod) => prod.id === item.productId
+  //             )
+  //             if (
+  //               findedProduct &&
+  //               !cartItems.find((prod) => prod.id === item.productId)
+  //             )
+  //               setCartItems((prev) => [
+  //                 ...prev,
+  //                 { ...findedProduct, quantity: item.quantity },
+  //               ])
+  //           })
+  //         }
+  //       })
+  //       .finally(() => setLoadingCart(false))
+  //   }
+  // }, [allProducts])
 
   return (
     <CartContext.Provider

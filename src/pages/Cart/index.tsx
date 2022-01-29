@@ -48,7 +48,7 @@ const Cart = () => {
   return (
     <Container>
       <PageHeader>
-        <MdKeyboardArrowLeft size={24} />
+        <MdKeyboardArrowLeft size={24} onClick={() => history.push('/')} />
 
         <PageTitle>Carrinho de compras</PageTitle>
       </PageHeader>
