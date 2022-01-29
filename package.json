@@ -21,6 +21,7 @@
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-speech-kit": "^3.0.1",
     "react-speech-recognition": "^3.9.0",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
@@ -57,6 +58,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-bootstrap": "^0.32.29",
+    "@types/react-speech-recognition": "^3.9.0",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/antd": "^1.0.0",
     "@types/axios": "^0.14.0",
