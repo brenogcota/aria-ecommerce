@@ -5,6 +5,7 @@ interface CartContextProps {
   cartItems: any[]
   removeItemFromCart: (id: number) => void
   loadingCart: boolean
+  addToCart: (product: any) => void
 }
 
 const CartContext = createContext({} as CartContextProps)
@@ -18,6 +19,10 @@ export const CartProvider: React.FC = ({ children }) => {
     const filteredCart = cartItems.filter((item) => item.id !== id)
 
     setCartItems(filteredCart)
+  }
+
+  const addToCart = (product: any) => {
+    setCartItems([product, ...cartItems])
   }
 
   useEffect(() => {
@@ -56,7 +61,7 @@ export const CartProvider: React.FC = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, removeItemFromCart, loadingCart }}
+      value={{ cartItems, removeItemFromCart, loadingCart, addToCart }}
     >
       {children}
     </CartContext.Provider>
