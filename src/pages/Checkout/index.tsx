@@ -3,7 +3,7 @@ import { Container } from './styles'
 const Checkout = () => {
   return (
     <Container>
-      <h1>Checkout</h1>
+      <h3>Preencha seus dados</h3>
     </Container>
   )
 }

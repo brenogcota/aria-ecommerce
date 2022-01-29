@@ -24,7 +24,7 @@ import {
 } from './styles'
 
 const Cart = () => {
-  const { cartItems } = useCart()
+  const { cartItems, removeItemFromCart, loadingCart } = useCart()
   const [totalCartPrice, setTotalCartPrice] = useState(0)
 
   const history = useHistory()
@@ -38,6 +38,8 @@ const Cart = () => {
       }, 0)
 
       setTotalCartPrice(totalPrice)
+    } else {
+      setTotalCartPrice(0)
     }
   }, [cartItems])
 
@@ -49,41 +51,52 @@ const Cart = () => {
         <PageTitle>Carrinho de compras</PageTitle>
       </PageHeader>
 
-      <Content>
-        {cartItems.length > 0 ? (
-          <>
-            {cartItems.map((item) => (
-              <Card key={item.id}>
-                <IoMdCloseCircle size={20} color="#333" />
-                <ImageWrapper>
-                  <img src={item.image} alt={item.title} />
-                </ImageWrapper>
-                <Description>
-                  <div>
-                    <ProductName>{item.title}</ProductName>
-                  </div>
-                  <ProductQuantity>
-                    <span>Quantidade: {item.quantity}</span>
-                  </ProductQuantity>
-                  <ProductPrice>{formatCurrency(item.price)}</ProductPrice>
-                </Description>
-              </Card>
-            ))}
-          </>
-        ) : (
-          <span>Carregando...</span>
-        )}
-      </Content>
+      {loadingCart ? (
+        <Content>
+          <span>Buscando itens...</span>
+        </Content>
+      ) : (
+        <Content>
+          {cartItems.length > 0 ? (
+            <>
+              {cartItems.map((item) => (
+                <Card key={item.id}>
+                  <IoMdCloseCircle
+                    size={20}
+                    color="#333"
+                    onClick={() => removeItemFromCart(item.id)}
+                  />
+                  <ImageWrapper>
+                    <img src={item.image} alt={item.title} />
+                  </ImageWrapper>
+                  <Description>
+                    <div>
+                      <ProductName>{item.title}</ProductName>
+                    </div>
+                    <ProductQuantity>
+                      <span>Quantidade: {item.quantity}</span>
+                    </ProductQuantity>
+                    <ProductPrice>{formatCurrency(item.price)}</ProductPrice>
+                  </Description>
+                </Card>
+              ))}
+            </>
+          ) : (
+            <span>Seu carrinho está vazio!</span>
+          )}
+        </Content>
+      )}
+      {cartItems.length > 0 && (
+        <PageFooter>
+          <CartTotalPrice>
+            Total price: {formatCurrency(totalCartPrice)}
+          </CartTotalPrice>
 
-      <PageFooter>
-        <CartTotalPrice>
-          Total price: {formatCurrency(totalCartPrice)}
-        </CartTotalPrice>
-
-        <NextStepButton onClick={() => history.push('/checkout')}>
-          Seguir para pagamento
-        </NextStepButton>
-      </PageFooter>
+          <NextStepButton onClick={() => history.push('/checkout')}>
+            Seguir para pagamento
+          </NextStepButton>
+        </PageFooter>
+      )}
     </Container>
   )
 }
