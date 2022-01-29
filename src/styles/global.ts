@@ -4,6 +4,8 @@ import 'antd/dist/antd.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+    
     * {
         margin: 0;
         padding: 0;
@@ -20,7 +22,7 @@ export default createGlobalStyle`
     }
 
     body, input, button {
-        font: 14px 'Roboto', sans-serif;
+        font: 14px 'Open sans', sans-serif;
     }
 
     a {
