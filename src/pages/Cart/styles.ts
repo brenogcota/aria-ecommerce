@@ -43,7 +43,13 @@ export const Content = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+
+  overflow-y: auto;
+  overflow-x: unset;
+  width: 100%;
+  height: 400px;
+
+  padding: 8px 0;
 `
 
 export const Card = styled.li`

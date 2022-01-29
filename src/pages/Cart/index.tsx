@@ -29,6 +29,8 @@ const Cart = () => {
 
   const history = useHistory()
 
+  document.title = 'Osirianos | Carrinho'
+
   useEffect(() => {
     if (cartItems.length > 0) {
       const totalPrice = cartItems.reduce((acc, elem) => {
