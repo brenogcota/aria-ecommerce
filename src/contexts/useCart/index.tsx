@@ -32,7 +32,7 @@ export const CartProvider: React.FC = ({ children }) => {
       api
         .get('carts')
         .then((res) => {
-          const itemsInCart = res?.data[1]?.products
+          const itemsInCart = res?.data[0]?.products
 
           if (itemsInCart?.length > 0) {
             itemsInCart.forEach((item: any) => {
