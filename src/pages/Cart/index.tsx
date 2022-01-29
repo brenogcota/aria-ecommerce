@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { IoMdCloseCircle } from 'react-icons/io'
 import { MdKeyboardArrowLeft } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
+
 import { useCart } from '@/contexts/useCart'
 import api from '@/services/api'
+import { formatCurrency } from '@/utils'
 
 import {
   Container,
@@ -63,7 +65,7 @@ const Cart = () => {
                   <ProductQuantity>
                     <span>Quantidade: {item.quantity}</span>
                   </ProductQuantity>
-                  <ProductPrice>R$ {item.price}</ProductPrice>
+                  <ProductPrice>{formatCurrency(item.price)}</ProductPrice>
                 </Description>
               </Card>
             ))}
@@ -74,7 +76,9 @@ const Cart = () => {
       </Content>
 
       <PageFooter>
-        <CartTotalPrice>Total price: R$ {totalCartPrice}</CartTotalPrice>
+        <CartTotalPrice>
+          Total price: {formatCurrency(totalCartPrice)}
+        </CartTotalPrice>
 
         <NextStepButton onClick={() => history.push('/checkout')}>
           Seguir para pagamento
